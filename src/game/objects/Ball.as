@@ -8,7 +8,6 @@ package game.objects
 	 */
 	public class Ball extends Sprite
 	{
-		public var speed:int = 1;
 		public var speedX:int = -6;
 		public var speedY:int;
 		public var object:ballImage;
@@ -19,13 +18,8 @@ package game.objects
 		}
 		public function update(container:DisplayObjectContainer):void
 		{
-<<<<<<< HEAD
-			object.x += speedX * speed;
-			object.y += speedY* speed;
-=======
-			object.x += SpeedX + Math.abs(SpeedY/2);
-			object.y += SpeedY;
->>>>>>> origin/master
+			object.x += speedX + Math.abs(speedY/2);
+			object.y += speedY;
 			if (object.y >= container.stage.stageHeight)
 			{
 				speedY *= -1;

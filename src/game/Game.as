@@ -67,7 +67,7 @@ package game
 						powerUpManager.generatePowerUp(_allObstacles[i].powerupId);
 					}
 					_allObstacles[i].removeable = true;
-					_ball.SpeedX *= -1;
+					_ball.speedX *= -1;
 				}
 				if (_allObstacles[i].removeable)
 				{
@@ -84,8 +84,6 @@ package game
 				{
 					_ball.speedX *= -1;
 					_ball.speedY = BallAngle(_player01);
-					_ball.speed ++;
-					speedUp(.5)
 				}
 			}
 			if(_ball.object.hitTestObject(_enemy.pad))
@@ -94,15 +92,7 @@ package game
 				{
 					_ball.speedX *= -1;
 					_ball.speedY = BallAngle(_enemy);
-					speedUp(.5)
 				}
-			}
-		}
-		private function speedUp(speed:int):void
-		{
-			if (_ball.speed <= 3)
-			{
-			_ball.speed += speed;
 			}
 		}
 		private function BallAngle(paddel:Pad):Number
