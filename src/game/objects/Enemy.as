@@ -16,7 +16,7 @@ package game.objects
 		override public function update():void 
 		{
 			super.update();
-			/*var ballY:Number = _currentBall.ball.y;
+			var ballY:Number = _currentBall.ball.y;
 			if (pad.y < ballY)
 			{
 				_yVelocity = 1;
@@ -25,7 +25,6 @@ package game.objects
 			} else {
 				_yVelocity = 0;
 			}
-			*/
 		}
 	}
 }

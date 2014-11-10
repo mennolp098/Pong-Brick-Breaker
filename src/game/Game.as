@@ -3,6 +3,8 @@ package game
 	import flash.display.Sprite;
 	import game.objects.Enemy;
 	import game.objects.ObstacleManager;
+	import game.objects.Ball;
+	import game.objects.Pad;
 	import game.objects.Player;
 	import flash.events.Event;
 	/**
@@ -15,6 +17,7 @@ package game
 		private var _enemy:Enemy;
 		private var _obstacleManager:ObstacleManager;
 		private var _allObstacles:Array;
+		private var _ball:Ball;
 		public function Game() 
 		{
 			if (stage) init();
@@ -30,30 +33,47 @@ package game
 			
 			_allObstacles = _obstacleManager.spawnObstacles(this, 100, 1);
 			_allObstacles = _obstacleManager.spawnObstacles(this, 400, 1);
-			//_enemy = new Enemy(this,_ball);
+			_enemy = new Enemy(this,_ball);
+			_ball = new Ball(this);
+			_ball.Image.x = stage.stageWidth / 2;
+			_ball.Image.y = stage.stageHeight / 2;
+			
 			stage.addEventListener(Event.ENTER_FRAME, update);
 		}
 		
 		private function update(e:Event):void 
 		{
+			_ball.update(this);
 			_player01.update();
-			//_enemy.update(ball.y);
-			/*
-			if(ball.hitTestObject(_player.pad))
+			_enemy.update();
+			
+			
+			if(_ball.Image.hitTestObject(_player01.pad))
 			{
-				if(ballSpeedX > 0)
+				
+				if( _ball.SpeedX < 0)
 				{
-					ball.volasity *= -1;
+					trace("hi");
+					_ball.SpeedX *= -1;
+					_ball.SpeedY = BallAngle(_player01);
 				}
 			}
-			if(ball.hitTestObject(Paddle2))
+			if(_ball.Image.hitTestObject(_enemy.pad))
 			{
-				if(ballSpeedX > 0)
+				if(_ball.SpeedX > 0)
 				{
-					ball.volasity *= -1;
+					_ball.SpeedX *= -1;
+					_ball.SpeedY = BallAngle(_enemy);
 				}
 			}
-			*/
+			
+		}
+		private function BallAngle(paddel:Pad):Number
+		{
+			
+			var angel :Number = _ball.Image.height/2 * ( (_ball.Image.y-paddel.pad.y) / paddel.pad.height / 2 );
+			return angel;
+			
 		}
 		
 	}
