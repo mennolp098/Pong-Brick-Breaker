@@ -37,6 +37,7 @@
     </source-path>
     <library-path append="true">
       <path-element>C:\School\college\year02\pong\Pong-Brick-Breaker\lib\Library.swc</path-element>
+      <path-element>C:\School\college\year02\pong\Pong-Brick-Breaker\lib\BeauLibrary.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>
