@@ -35,8 +35,8 @@ package game
 			_allObstacles = _obstacleManager.spawnObstacles(this, 400, 1);
 			_enemy = new Enemy(this,_ball);
 			_ball = new Ball(this);
-			_ball.Image.x = stage.stageWidth / 2;
-			_ball.Image.y = stage.stageHeight / 2;
+			_ball.object.x = stage.stageWidth / 2;
+			_ball.object.y = stage.stageHeight / 2;
 			
 			stage.addEventListener(Event.ENTER_FRAME, update);
 		}
@@ -71,7 +71,7 @@ package game
 		private function BallAngle(paddel:Pad):Number
 		{
 			
-			var angel :Number = _ball.Image.height/2 * ( (_ball.Image.y-paddel.pad.y) / paddel.pad.height / 2 );
+			var angel :Number = _ball.object.height/2 * ( (_ball.object.y-paddel.pad.y) / paddel.pad.height / 2 );
 			return angel;
 			
 		}
