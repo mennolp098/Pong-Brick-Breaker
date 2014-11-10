@@ -8,18 +8,18 @@ package game.objects
 	 */
 	public class Ball extends Sprite
 	{
-		public var SpeedX:int;
+		public var SpeedX:int = -3;
 		public var SpeedY:int;
-		private var _ball:ballImage;
+		public var Image:ballImage;
 		public function Ball(container:DisplayObjectContainer) 
 		{
-			_ball = new ballImage();
-			container.addChild(_ball);
+			Image = new ballImage();
+			container.addChild(Image);
 		}
-		public function update():void
+		public function update(container:DisplayObjectContainer):void
 		{
-			this.x += SpeedX;
-			this.y += SpeedY;
+			Image.x += SpeedX;
+			Image.y += SpeedY;
 		}
 	}
 

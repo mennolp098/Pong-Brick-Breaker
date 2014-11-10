@@ -12,7 +12,17 @@ package game.objects
 		{
 			super(container);
 		}
-		
+		override public function update():void 
+		{
+			/*super.update();
+			if (pad.y < ballY)
+			{
+				_yVelocity = 1;
+			} else if(pad.y > ballY) {
+				_yVelocity = -1;
+			} else {
+				_yVelocity = 0;
+			}*/
+		}
 	}
-
 }
