@@ -1,5 +1,6 @@
 package game.objects 
 {
+	import flash.display.DisplayObjectContainer;
 	/**
 	 * ...
 	 * @author Menno Jongejan
@@ -7,9 +8,9 @@ package game.objects
 	public class Enemy extends Pad
 	{
 		
-		public function Enemy() 
+		public function Enemy(container:DisplayObjectContainer) 
 		{
-			
+			super(container);
 		}
 		
 	}
