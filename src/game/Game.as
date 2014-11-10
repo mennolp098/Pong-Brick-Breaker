@@ -33,7 +33,6 @@ package game
 			_obstacleManager = new ObstacleManager();
 			
 			_allObstacles = _obstacleManager.spawnObstacles(this, 100, 1);
-			_allObstacles = _obstacleManager.spawnObstacles(this, 400, 1);
 			
 			_ball = new Ball(this);
 			_ball.object.x = stage.stageWidth / 2;
@@ -68,6 +67,12 @@ package game
 						powerUpManager.generatePowerUp(_allObstacles[i].powerupId);
 					}
 					_allObstacles[i].removeable = true;
+					_ball.SpeedX *= -1;
+				}
+				if (_allObstacles[i].removeable)
+				{
+					removeChild(_allObstacles[i]);
+					_allObstacles.splice(i, 1);
 				}
 			}
 		}
@@ -103,7 +108,7 @@ package game
 		private function BallAngle(paddel:Pad):Number
 		{
 			
-			var angel :Number = _ball.object.height/2 * ( (_ball.object.y-paddel.pad.y) / paddel.pad.height / 2 );
+			var angel :Number = _ball.object.height / 2 * ( (_ball.object.y - paddel.pad.y) / paddel.pad.height / 2 );
 			return angel;
 			
 		}

@@ -19,6 +19,7 @@ package game.objects
 		{
 			pad = new PadImage();
 			container.addChild(pad);
+			pad.y = 300;
 			_yVelocity = 0;
 			_speed = 5;
 		}
