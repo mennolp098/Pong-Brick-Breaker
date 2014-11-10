@@ -21,7 +21,7 @@ package
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
-			var _game:Game();
+			var _game:Game;
 			_game = new Game();
 			addChild(_game);
 		}
