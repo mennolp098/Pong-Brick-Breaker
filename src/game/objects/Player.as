@@ -8,38 +8,44 @@ package game.objects
 	 */
 	public class Player extends Pad
 	{
-		private var _Ymovement:Number;
-		public function Player(container:DisplayObjectContainer) 
+		private var _upKey:int;
+		private var _downKey:int;
+		public function Player(container:DisplayObjectContainer, player02:Boolean) 
 		{
 			super(container);
-			
-			_pad.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
-			_pad.addEventListener(KeyboardEvent.KEY_UP, keyUp);
+			if (player02)
+			{
+				_upKey = 87;
+				_downKey = 83;
+			} else {
+				_upKey = 38;
+				_downKey = 40;
+			}
+			container.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
+			container.stage.addEventListener(KeyboardEvent.KEY_UP, keyUp);
 		
 		}
 		private function keyDown(e:KeyboardEvent):void
 		{
-			if (e.keyCode == 38)
+			if (e.keyCode == _upKey)
 			{
-				_Ymovement = -1;
+				_yVelocity = -1;
 			} 
-			if (e.keyCode == 40)
+			if (e.keyCode == _downKey)
 			{
-				_Ymovement = 1;
+				_yVelocity = 1;
 			}
-			changeVelocity(_Ymovement);
 		}
 		private function keyUp(e:KeyboardEvent):void
 		{
-			if (e.keyCode == 38)
+			if (e.keyCode == _upKey)
 			{
-				_Ymovement = 0;
+				_yVelocity = 0;
 			} 
-			else if (e.keyCode == 40)
+			if (e.keyCode == _downKey)
 			{
-				_Ymovement = 0;
+				_yVelocity = 0;
 			}
-			changeVelocity(_Ymovement);
 		}
 	}
 }

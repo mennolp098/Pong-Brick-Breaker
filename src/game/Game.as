@@ -1,6 +1,7 @@
 package game 
 {
 	import flash.display.Sprite;
+	import game.objects.Enemy;
 	import game.objects.Player;
 	import flash.events.Event;
 	/**
@@ -9,6 +10,8 @@ package game
 	 */
 	public class Game extends Sprite
 	{
+		private var _player01:Player;
+		private var _enemy:Enemy;
 		public function Game() 
 		{
 			if (stage) init();
@@ -19,13 +22,17 @@ package game
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
+			_player01 = new Player(this, false);
+			_enemy = new Enemy(this);
 			stage.addEventListener(Event.ENTER_FRAME, update);
 		}
 		
 		private function update(e:Event):void 
 		{
+			_player01.update();
+			//_enemy.update(ball.y);
 			/*
-			if(ball.hitTestObject(Paddle1))
+			if(ball.hitTestObject(_player.pad))
 			{
 				if(ballSpeedX > 0)
 				{
