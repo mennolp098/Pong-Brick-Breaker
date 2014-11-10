@@ -38,7 +38,7 @@ package game
 			_ball = new Ball(this);
 			_ball.object.x = stage.stageWidth / 2;
 			_ball.object.y = stage.stageHeight / 2;
-			
+
 			_enemy = new Enemy(this, _ball);
 			
 			stage.addEventListener(Event.ENTER_FRAME, update);
