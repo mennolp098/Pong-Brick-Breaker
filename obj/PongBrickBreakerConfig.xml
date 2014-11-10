@@ -33,9 +33,7 @@
       <path-element>D:\programmas\xampp\htdocs\school\jaar2\periode 1\Pong Brick Breaker\Pong-Brick-Breaker\src</path-element>
       <path-element>D:\programmas\flash developer\Library\AS3\classes</path-element>
     </source-path>
-    <library-path append="true">
-      <path-element>D:\programmas\xampp\htdocs\school\jaar2\periode 1\Pong Brick Breaker\Pong-Brick-Breaker\lib\Library.swc</path-element>
-    </library-path>
+    <library-path append="true" />
   </compiler>
   <file-specs>
     <path-element>D:\programmas\xampp\htdocs\school\jaar2\periode 1\Pong Brick Breaker\Pong-Brick-Breaker\src\Main.as</path-element>
