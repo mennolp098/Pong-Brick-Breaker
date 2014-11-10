@@ -18,7 +18,7 @@ package game.objects
 		}
 		public function update(container:DisplayObjectContainer):void
 		{
-			object.x += SpeedX;
+			object.x += SpeedX + Math.abs(SpeedY/2);
 			object.y += SpeedY;
 			if (object.y >= container.stage.stageHeight)
 			{
