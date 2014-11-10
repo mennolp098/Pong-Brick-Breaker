@@ -2,6 +2,7 @@ package game
 {
 	import flash.display.Sprite;
 	import game.objects.Enemy;
+	import game.objects.ObstacleManager;
 	import game.objects.Player;
 	import flash.events.Event;
 	/**
@@ -12,6 +13,8 @@ package game
 	{
 		private var _player01:Player;
 		private var _enemy:Enemy;
+		private var _obstacleManager:ObstacleManager;
+		private var _allObstacles:Array;
 		public function Game() 
 		{
 			if (stage) init();
@@ -21,9 +24,13 @@ package game
 		private function init(e:Event = null):void 
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			
+			_allObstacles = [];
 			_player01 = new Player(this, false);
-			_enemy = new Enemy(this);
+			_obstacleManager = new ObstacleManager();
+			
+			_allObstacles = _obstacleManager.spawnObstacles(this, 100, 1);
+			_allObstacles = _obstacleManager.spawnObstacles(this, 400, 1);
+			//_enemy = new Enemy(this,_ball);
 			stage.addEventListener(Event.ENTER_FRAME, update);
 		}
 		

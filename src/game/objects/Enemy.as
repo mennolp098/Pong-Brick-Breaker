@@ -7,14 +7,16 @@ package game.objects
 	 */
 	public class Enemy extends Pad
 	{
-		
-		public function Enemy(container:DisplayObjectContainer) 
+		private var _currentBall:Ball;
+		public function Enemy(container:DisplayObjectContainer, ball:Ball) 
 		{
 			super(container);
+			_currentBall = ball;
 		}
-		override public function update(ballY:Number):void 
+		override public function update():void 
 		{
 			super.update();
+			/*var ballY:Number = _currentBall.ball.y;
 			if (pad.y < ballY)
 			{
 				_yVelocity = 1;
@@ -23,6 +25,7 @@ package game.objects
 			} else {
 				_yVelocity = 0;
 			}
+			*/
 		}
 	}
 }
