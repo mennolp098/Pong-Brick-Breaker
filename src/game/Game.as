@@ -75,19 +75,29 @@ package game
 		{
 			if(_ball.object.hitTestObject(_player01.pad))
 			{
-				if( _ball.SpeedX < 0)
+				if( _ball.speedX < 0)
 				{
-					_ball.SpeedX *= -1;
-					_ball.SpeedY = BallAngle(_player01)*1.5;
+					_ball.speedX *= -1;
+					_ball.speedY = BallAngle(_player01);
+					_ball.speed ++;
+					speedUp(.5)
 				}
 			}
 			if(_ball.object.hitTestObject(_enemy.pad))
 			{
-				if(_ball.SpeedX > 0)
+				if(_ball.speedX > 0)
 				{
-					_ball.SpeedX *= -1;
-					_ball.SpeedY = BallAngle(_enemy)*1.5;
+					_ball.speedX *= -1;
+					_ball.speedY = BallAngle(_enemy);
+					speedUp(.5)
 				}
+			}
+		}
+		private function speedUp(speed:int):void
+		{
+			if (_ball.speed <= 3)
+			{
+			_ball.speed += speed;
 			}
 		}
 		private function BallAngle(paddel:Pad):Number
