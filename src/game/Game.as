@@ -7,6 +7,7 @@ package game
 	import game.objects.Pad;
 	import game.objects.Player;
 	import flash.events.Event;
+	import game.objects.PowerUpManager;
 	/**
 	 * ...
 	 * @author Menno Jongejan
@@ -33,10 +34,12 @@ package game
 			
 			_allObstacles = _obstacleManager.spawnObstacles(this, 100, 1);
 			_allObstacles = _obstacleManager.spawnObstacles(this, 400, 1);
-			_enemy = new Enemy(this,_ball);
+			
 			_ball = new Ball(this);
-			_ball.Image.x = stage.stageWidth / 2;
-			_ball.Image.y = stage.stageHeight / 2;
+			_ball.object.x = stage.stageWidth / 2;
+			_ball.object.y = stage.stageHeight / 2;
+			
+			_enemy = new Enemy(this, _ball);
 			
 			stage.addEventListener(Event.ENTER_FRAME, update);
 		}
@@ -46,32 +49,51 @@ package game
 			_ball.update(this);
 			_player01.update();
 			_enemy.update();
+			padCollision();
+			obstacleCollision();
 			
 			
-			if(_ball.Image.hitTestObject(_player01.pad))
+		}
+		private function obstacleCollision():void
+		{
+			var l:int = _allObstacles.length;
+			for (var i:int = l-1; i > 0; i--) 
 			{
-				
-				if( _ball.SpeedX < 0)
+				if (_ball.object.hitTestObject(_allObstacles[i]))
 				{
-					trace("hi");
-					_ball.SpeedX *= -1;
-					_ball.SpeedY = BallAngle(_player01);
+					if (Math.random() * 60 == 1)
+					{
+						var powerUpManager:PowerUpManager;
+						powerUpManager = new PowerUpManager();
+						powerUpManager.generatePowerUp(_allObstacles[i].powerupId);
+					}
+					_allObstacles[i].removeable = true;
 				}
 			}
-			if(_ball.Image.hitTestObject(_enemy.pad))
+		}
+		private function padCollision():void
+		{
+			if(_ball.object.hitTestObject(_player01.pad))
+			{
+				if( _ball.SpeedX < 0)
+				{
+					_ball.SpeedX *= -1;
+					_ball.SpeedY = BallAngle(_player01)*1.5;
+				}
+			}
+			if(_ball.object.hitTestObject(_enemy.pad))
 			{
 				if(_ball.SpeedX > 0)
 				{
 					_ball.SpeedX *= -1;
-					_ball.SpeedY = BallAngle(_enemy);
+					_ball.SpeedY = BallAngle(_enemy)*1.5;
 				}
 			}
-			
 		}
 		private function BallAngle(paddel:Pad):Number
 		{
 			
-			var angel :Number = _ball.Image.height/2 * ( (_ball.Image.y-paddel.pad.y) / paddel.pad.height / 2 );
+			var angel :Number = _ball.object.height/2 * ( (_ball.object.y-paddel.pad.y) / paddel.pad.height / 2 );
 			return angel;
 			
 		}
