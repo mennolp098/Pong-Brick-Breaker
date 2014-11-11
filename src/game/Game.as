@@ -96,16 +96,9 @@ package game
 				}
 			}
 		}
-<<<<<<< HEAD
 		private function speedUp(speed:int):void
 		{
-			if (_ball.speed <= 3)
-			{
-				_ball.speed += speed;
-			}
 		}
-=======
->>>>>>> origin/master
 		private function BallAngle(paddel:Pad):Number
 		{
 			
