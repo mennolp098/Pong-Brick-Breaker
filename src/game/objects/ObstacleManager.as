@@ -12,7 +12,7 @@ package game.objects
 		{
 			var currentArray:Array = [];
 			var counter:int = 0;
-			var x:int = 10;
+			var x:int = beginX;
 			var y:int = 100;
 			var displayImage:MovieClip;
 			

@@ -13,12 +13,14 @@ package game.objects
 		public function Player(container:DisplayObjectContainer, player02:Boolean) 
 		{
 			super(container);
+			pad.x = 200;
 			if (player02)
 			{
 				_upKey = 87;
 				_downKey = 83;
 			} else {
 				_upKey = 38;
+				
 				_downKey = 40;
 			}
 			container.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);

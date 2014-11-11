@@ -3,6 +3,7 @@ package
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import game.Game;
+	import game.objects.Obstacle;
 	
 	/**
 	 * ...
@@ -20,11 +21,13 @@ package
 		private function init(e:Event = null):void 
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
+			
 			// entry point
 			var _game:Game;
 			_game = new Game();
 			addChild(_game);
 		}
+		
 		
 	}
 	

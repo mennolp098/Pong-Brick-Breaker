@@ -2,6 +2,7 @@ package game.objects
 {
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
+	import flash.events.Event;
 	/**
 	 * ...
 	 * @author Menno Jongejan
@@ -10,7 +11,6 @@ package game.objects
 	{
 		public var displayArt:MovieClip;
 		public var powerupId:int;
-		public var removeable:Boolean = false;
 		public function Obstacle(art:MovieClip,id:int) 
 		{
 			displayArt = art;
