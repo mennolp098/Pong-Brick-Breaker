@@ -85,8 +85,6 @@ package game
 				{
 					_ball.speedX *= -1;
 					_ball.speedY = BallAngle(_player01);
-					_ball.speed ++;
-					speedUp(.5)
 				}
 			}
 			if(_ball.object.hitTestObject(_enemy.pad))
@@ -95,10 +93,10 @@ package game
 				{
 					_ball.speedX *= -1;
 					_ball.speedY = BallAngle(_enemy);
-					speedUp(.5)
 				}
 			}
 		}
+<<<<<<< HEAD
 		private function speedUp(speed:int):void
 		{
 			if (_ball.speed <= 3)
@@ -106,6 +104,8 @@ package game
 				_ball.speed += speed;
 			}
 		}
+=======
+>>>>>>> origin/master
 		private function BallAngle(paddel:Pad):Number
 		{
 			
