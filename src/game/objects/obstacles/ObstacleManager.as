@@ -1,4 +1,4 @@
-package game.objects 
+package game.objects.obstacles 
 {
 	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;

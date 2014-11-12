@@ -1,14 +1,14 @@
 package game 
 {
 	import flash.display.Sprite;
-	import game.objects.Enemy;
-	import game.objects.ObstacleManager;
-	import game.objects.Ball;
-	import game.objects.Pad;
-	import game.objects.Player;
+	import game.objects.pads.Enemy;
+	import game.objects.obstacles.ObstacleManager;
+	import game.objects.ball.Ball;
+	import game.objects.pads.Pad;
+	import game.objects.pads.Player;
 	import flash.events.Event;
-	import game.objects.PowerUpManager;
-	import game.objects.Obstacle;
+	import game.objects.powerups.PowerUpManager;
+	import game.objects.obstacles.Obstacle;
 	/**
 	 * ...
 	 * @author Menno Jongejan
@@ -73,7 +73,6 @@ package game
 					removeChild(_currentArray[i]);
 					_currentArray.splice(i, 1);
 					_ball.speedX *= -1;
-					_ball.speedY  = 0;
 				}
 			}
 		}
@@ -96,16 +95,14 @@ package game
 				}
 			}
 		}
-<<<<<<< HEAD
+		/*
 		private function speedUp(speed:int):void
 		{
 			if (_ball.speed <= 3)
 			{
 				_ball.speed += speed;
 			}
-		}
-=======
->>>>>>> origin/master
+		} */
 		private function BallAngle(paddel:Pad):Number
 		{
 			

@@ -1,6 +1,7 @@
-package game.objects 
+package game.objects.pads 
 {
 	import flash.display.DisplayObjectContainer;
+	import game.objects.ball.Ball;
 	/**
 	 * ...
 	 * @author Menno Jongejan
@@ -18,21 +19,32 @@ package game.objects
 		{
 			super.update();
 			var ballY:Number = _currentBall.object.y;
-			if (pad.y+20 < ballY)
+			var ballX:Number = _currentBall.object.x;
+			if (ballX > 400)
 			{
-				if (_yVelocity <= 1)
+				if (pad.y+20 < ballY)
 				{
-					_yVelocity += 0.1;
+					if (_yVelocity <= 1)
+					{
+						_yVelocity += 0.1;
+					}
+				} 
+				else if (pad.y - 20 > ballY) 
+				{
+					if (_yVelocity >= -1)
+					{
+						_yVelocity -= 0.1;
+					}
 				}
-			} else if(pad.y-20 > ballY) {
-				if (_yVelocity >= -1)
+			} else {
+				if (_yVelocity > 0) 
 				{
 					_yVelocity -= 0.1;
 				}
-			} else if(_yVelocity > 0) {
-				_yVelocity -= 0.1;
-			} else if (_yVelocity < 0) {
+				else if (_yVelocity < 0) 
+				{
 				_yVelocity += 0.1;
+				}
 			}
 		}
 	}

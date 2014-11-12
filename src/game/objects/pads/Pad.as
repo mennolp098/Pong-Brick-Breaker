@@ -1,4 +1,4 @@
-package game.objects 
+package game.objects.pads 
 {
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;

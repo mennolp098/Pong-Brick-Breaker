@@ -1,4 +1,4 @@
-package game.objects 
+package game.objects.ball 
 {
 	import flash.display.Sprite;
 	import flash.display.DisplayObjectContainer;
