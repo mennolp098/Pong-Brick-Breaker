@@ -18,26 +18,38 @@ package game.objects.obstacles
 			
 			for (var i:int = 0; i < 15; i++) 
 			{
+				displayImage = new ObstacleImage01();
 				var obstacle:Obstacle;
-				switch(Math.random() * 5)
+				var tabel:int = Math.random() * 7;
+				switch(tabel)
 				{
+					
 					case 0:
-						displayImage = new ObstacleImage01();
+						displayImage.gotoAndStop(1);
 						break;
 					case 1:
-						displayImage = new ObstacleImage01();
+						displayImage.gotoAndStop(2);
 						break;
 					case 2:
-						displayImage = new ObstacleImage01();
+						displayImage.gotoAndStop(3);
 						break;
 					case 3:
-						displayImage = new ObstacleImage01();
+						displayImage.gotoAndStop(4);
 						break;
 					case 4:
-						displayImage = new ObstacleImage01();
+						displayImage.gotoAndStop(5);
+						break;
+					case 5:
+						displayImage.gotoAndStop(6);
+						break;
+					case 6:
+						displayImage.gotoAndStop(7);
+						break;
+					case 7:
+						displayImage.gotoAndStop(8);
 						break;
 					default:
-						displayImage = new ObstacleImage01();
+						displayImage.gotoAndStop(1);
 						break;
 				}
 				obstacle = new Obstacle(displayImage,powerupId);

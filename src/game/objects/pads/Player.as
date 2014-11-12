@@ -32,10 +32,12 @@ package game.objects.pads
 			if (e.keyCode == _upKey)
 			{
 				_yVelocity = -1;
+				pad.gotoAndStop(4);
 			} 
 			if (e.keyCode == _downKey)
 			{
 				_yVelocity = 1;
+				pad.gotoAndStop(5);
 			}
 		}
 		private function keyUp(e:KeyboardEvent):void
@@ -43,10 +45,12 @@ package game.objects.pads
 			if (e.keyCode == _upKey)
 			{
 				_yVelocity = 0;
+				pad.gotoAndStop(1);
 			} 
 			if (e.keyCode == _downKey)
 			{
 				_yVelocity = 0;
+				pad.gotoAndStop(1);
 			}
 		}
 	}
