@@ -15,6 +15,7 @@ package game.objects.pads
 			super(container);
 			pad.x = 600;
 			_currentBall = ball;
+			pad.scaleX = -1;
 		}
 		override public function update():void 
 		{
@@ -32,6 +33,7 @@ package game.objects.pads
 					if (_yVelocity <= 1)
 					{
 						_yVelocity += 0.1;
+						pad.gotoAndStop(5);
 					}
 				} 
 				else if (pad.y - 20 > ballY) 
@@ -39,7 +41,10 @@ package game.objects.pads
 					if (_yVelocity >= -1)
 					{
 						_yVelocity -= 0.1;
+						pad.gotoAndStop(4);
 					}
+				} else {
+					pad.gotoAndStop(1);
 				}
 			} else {
 				if (_yVelocity > 0) 
@@ -49,6 +54,8 @@ package game.objects.pads
 				else if (_yVelocity < 0) 
 				{
 					_yVelocity += 0.1;
+				} else {
+					pad.gotoAndStop(1);
 				}
 			}
 		}

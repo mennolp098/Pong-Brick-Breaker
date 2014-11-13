@@ -27,6 +27,8 @@ package game.objects.ball
 		{
 			object.x += speedX + Math.abs(speedY/1.25);
 			object.y += speedY;
+			object.scaleX = speedX/6;
+			trace(speedX);
 			if (object.y >= container.stage.stageHeight)
 			{
 				speedY *= -1;
@@ -53,36 +55,8 @@ package game.objects.ball
 		}
 		private function changeImage(container:DisplayObjectContainer,posX:Number, posY:Number):void
 		{
-			container.removeChild(object);
-			switch(Math.random() * 8) {
-				case 0:
-					object = new ballImage;
-					break;
-				case 1:
-					object = new ballImage;
-					break;
-				case 2:
-					object = new ballImage;
-					break;
-				case 3:
-					object = new ballImage;
-					break;
-				case 4:
-					object = new ballImage;
-					break;
-				case 5:
-					object = new ballImage;
-					break;
-				case 6:
-					object = new ballImage;
-					break;
-				case 7:
-					object = new ballImage;
-					break;
-				default:
-					break;
-			}
-			container.addChild(object);
+			var frame:int = Math.random() * 8;
+			object.gotoAndStop(frame+1);
 			object.x = posX;
 			object.y = posY;
 			isFired = false;
