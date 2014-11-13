@@ -41,7 +41,7 @@ package game
 			_ball = new Ball(this, _player01);
 			_ball.object.x = stage.stageWidth / 2;
 			_ball.object.y = stage.stageHeight / 2;
-
+			
 			_enemy = new Enemy(this, _ball);
 			
 			stage.addEventListener(Event.ENTER_FRAME, update);
@@ -104,6 +104,7 @@ package game
 				{
 					_ball.speedX *= -1;
 					_ball.speedY = BallAngle(_player01);
+					speedUp();
 				}
 			}
 			if(_ball.object.hitTestObject(_enemy.pad))
@@ -112,7 +113,15 @@ package game
 				{
 					_ball.speedX *= -1;
 					_ball.speedY = BallAngle(_enemy);
+					speedUp();
 				}
+			}
+		}
+		private function speedUp():void
+		{
+			if (_ball.addedspeed <= 3)
+			{
+			_ball.addedspeed += 0.1;
 			}
 		}
 		private function BallAngle(paddel:Pad):Number

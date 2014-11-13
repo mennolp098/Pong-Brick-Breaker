@@ -10,22 +10,26 @@ package game.objects.ball
 	 */
 	public class Ball extends Sprite
 	{
-		public var speedX:int = -6;
+		public var speedX:Number = -6;
 		public var speedY:int;
 		public var object:MovieClip;
 		public var isFired:Boolean;
 		private var _whoCanFire:String;
 		private var _player:Player;
+		public var addedspeed:Number = 1;
 		public function Ball(container:DisplayObjectContainer, player:Player) 
 		{
 			object = new ballImage();
 			container.addChild(object);
 			isFired = true;
 			_player = player;
+			object.gotoAndStop(Math.random() * 7 +1);
 		}
 		public function update(container:DisplayObjectContainer):void
 		{
-			object.x += speedX + Math.abs(speedY/1.25);
+			trace(addedspeed);
+			trace(speedX);
+			object.x += speedX * addedspeed;
 			object.y += speedY;
 			object.scaleX = speedX/6;
 			if (object.y >= container.stage.stageHeight)
@@ -47,6 +51,7 @@ package game.objects.ball
 		}
 		public function die(container:DisplayObjectContainer,posX:Number, posY:Number,whoCanFire:String):void
 		{
+			addedspeed = 1;
 			speedX = 0;
 			speedY = 0;
 			_whoCanFire = whoCanFire;
