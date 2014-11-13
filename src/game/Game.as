@@ -57,7 +57,6 @@ package game
 				_ball.fireBall("enemy");
 			}
 		}
-		
 		private function update(e:Event):void 
 		{
 			_ball.update(this);
@@ -116,14 +115,6 @@ package game
 				}
 			}
 		}
-		/*
-		private function speedUp(speed:int):void
-		{
-			if (_ball.speed <= 3)
-			{
-				_ball.speed += speed;
-			}
-		} */
 		private function BallAngle(paddel:Pad):Number
 		{
 			

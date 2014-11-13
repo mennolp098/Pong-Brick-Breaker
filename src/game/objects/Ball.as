@@ -28,14 +28,6 @@ package game.objects
 			{
 				speedY *= -1;
 			}
-			if (object.x <= container.stage.stageWidth)
-			{
-				speedX *= -1;
-			}
-			if (object.x >= 0)
-			{
-				speedX *= -1;
-			}
 		}
 	}
 
