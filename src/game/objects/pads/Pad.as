@@ -22,6 +22,7 @@ package game.objects.pads
 			pad.y = 300;
 			_yVelocity = 0;
 			_speed = 5;
+			pad.gotoAndStop(2);
 		}
 		public function update():void
 		{
