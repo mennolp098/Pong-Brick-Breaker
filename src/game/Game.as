@@ -19,7 +19,7 @@ package game
 		private var _enemy:Enemy;
 		private var _obstacleManager:ObstacleManager;
 		private var _player01Obstacles:Array;
-		private var _player02Obstacles:Array;
+		private var _enemyObstacles:Array;
 		private var _ball:Ball;
 		public function Game() 
 		{
@@ -31,20 +31,31 @@ package game
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			_player01Obstacles = [];
-			_player02Obstacles = [];
-			_player01 = new Player(this, false);
+			_enemyObstacles = [];
+			_player01 = new Player(this);
 			_obstacleManager = new ObstacleManager();
 			
 			_player01Obstacles = _obstacleManager.spawnObstacles(this, 10, 1);
-			_player02Obstacles = _obstacleManager.spawnObstacles(this, 660, 0);
+			_enemyObstacles = _obstacleManager.spawnObstacles(this, 660, 0);
 			
-			_ball = new Ball(this);
+			_ball = new Ball(this, _player01);
 			_ball.object.x = stage.stageWidth / 2;
 			_ball.object.y = stage.stageHeight / 2;
 
 			_enemy = new Enemy(this, _ball);
 			
 			stage.addEventListener(Event.ENTER_FRAME, update);
+			_player01.addEventListener(Pad.FIREBALL, fireBall);
+			_enemy.addEventListener(Pad.FIREBALL, fireBall);
+		}
+		
+		private function fireBall(e:Event):void 
+		{
+			if (e.currentTarget == _player01) {
+				_ball.fireBall("player");
+			} else {
+				_ball.fireBall("enemy");
+			}
 		}
 		
 		private function update(e:Event):void 
@@ -54,12 +65,13 @@ package game
 			_enemy.update();
 			padCollision();
 			obstacleCollision(_player01Obstacles);
-			obstacleCollision(_player02Obstacles);
-			
+			obstacleCollision(_enemyObstacles);
 		}
 		private function obstacleCollision(_currentArray:Array):void
 		{
 			var l:int = _currentArray.length;
+			var spawnPos:Array;
+			var whoCanFire:String;
 			for (var i:int = l-1; i > 0; i--) 
 			{
 				if (_ball.object.hitTestObject(_currentArray[i]))
@@ -72,7 +84,16 @@ package game
 					}
 					removeChild(_currentArray[i]);
 					_currentArray.splice(i, 1);
-					_ball.speedX *= -1;
+					
+					if (_currentArray == _enemyObstacles)
+					{
+						spawnPos = [_enemy.pad.x, _enemy.pad.y];
+						whoCanFire = "enemy";
+					} else {
+						spawnPos = [_player01.pad.x, _player01.pad.y];
+						whoCanFire = "player";
+					}
+					_ball.die(this,spawnPos[0],spawnPos[1],whoCanFire);
 				}
 			}
 		}

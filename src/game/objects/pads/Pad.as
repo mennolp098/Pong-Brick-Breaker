@@ -2,15 +2,17 @@ package game.objects.pads
 {
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
+	import flash.events.EventDispatcher;
 	import game.Game;
 	/**
 	 * ...
 	 * @author Menno Jongejan
 	 */
-	public class Pad
+	public class Pad extends EventDispatcher
 	{
-		protected var _yVelocity:Number;
+		public static const FIREBALL:String = "fireBall";
 		
+		protected var _yVelocity:Number;
 		protected var _speed:Number
 		
 		public var pad:PadImage;
