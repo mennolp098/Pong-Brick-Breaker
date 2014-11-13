@@ -101,7 +101,7 @@ package game
 		{
 			if(_ball.object.hitTestObject(_player01.pad))
 			{
-				if( _ball.speedX < 0)
+				if( _ball.speedX < 0 && _player01.pad.currentFrame == 1)
 				{
 					_ball.speedX *= -1;
 					_ball.speedY = BallAngle(_player01);
@@ -109,7 +109,7 @@ package game
 			}
 			if(_ball.object.hitTestObject(_enemy.pad))
 			{
-				if(_ball.speedX > 0)
+				if(_ball.speedX > 0 && _enemy.pad.currentFrame == 1)
 				{
 					_ball.speedX *= -1;
 					_ball.speedY = BallAngle(_enemy);

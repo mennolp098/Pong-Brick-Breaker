@@ -28,7 +28,6 @@ package game.objects.ball
 			object.x += speedX + Math.abs(speedY/1.25);
 			object.y += speedY;
 			object.scaleX = speedX/6;
-			trace(speedX);
 			if (object.y >= container.stage.stageHeight)
 			{
 				speedY *= -1;

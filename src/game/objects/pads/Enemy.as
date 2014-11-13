@@ -28,7 +28,7 @@ package game.objects.pads
 			}
 			if (ballX > 400)
 			{
-				if (pad.y+20 < ballY)
+				if (pad.y+40 < ballY)
 				{
 					if (_yVelocity <= 1)
 					{
@@ -36,7 +36,7 @@ package game.objects.pads
 						pad.gotoAndStop(5);
 					}
 				} 
-				else if (pad.y - 20 > ballY) 
+				else if (pad.y - 40 > ballY) 
 				{
 					if (_yVelocity >= -1)
 					{
