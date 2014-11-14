@@ -32,7 +32,7 @@ package game.objects.ball
 			object.x += speedX * addedspeed;
 			object.y += speedY;
 			object.scaleX = speedX / 6;
-			if (object.x <= stage.stageWidth)
+			if (object.x <= container.stage.stageWidth)
 			{
 				trace("hi");
 			}
