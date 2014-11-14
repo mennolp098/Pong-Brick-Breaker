@@ -49,6 +49,7 @@ package game.menu
 			if (_helpMenu.currentFrame == 90)
 			{
 				_helpMenu.gotoAndStop(90);
+				_helpMenu.gotoAndStop(89);
 				_helpMenu.addEventListener(MouseEvent.CLICK,exit);
 			}
 			if (_creditsMenu.currentFrame == 90)
