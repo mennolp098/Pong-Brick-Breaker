@@ -11,20 +11,18 @@ package game.objects.powerups
 		
 		public function WallPowerup(id:int) 
 		{
-			super(id);
 			powerupImage = new PowerupImageWall();
 			addChild(powerupImage);
+			super(id);
 		}
 		override public function sendPower(container:Game):void
 		{
 			super.sendPower(container);
-			var wall:WallImage = new WallImage();
 			if (powerupId == 0)
 			{
-				container.addChild(wall);
-				wall.x = 200;
+				container.createWall(200);
 			} else {
-				wall.x = 600;
+				container.createWall(600);
 			}
 		}
 	}

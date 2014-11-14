@@ -23,6 +23,7 @@ package game
 		private var player01Obstacles:Array;
 		private var enemyObstacles:Array;
 		private var _powerUpArray:Array;
+		private var _wallArray:Array;
 		private var _ball:Ball;
 		private var _soundManager:SoundManager;
 		public function Game() 
@@ -37,6 +38,7 @@ package game
 			player01Obstacles = [];
 			enemyObstacles = [];
 			_powerUpArray = [];
+			_wallArray = [];
 			player01 = new Player(this);
 			_obstacleManager = new ObstacleManager();
 			_soundManager = new SoundManager();
@@ -69,15 +71,36 @@ package game
 			player01.update();
 			enemy.update();
 			padCollision();
+			wallCollision();
 			obstacleCollision(player01Obstacles);
 			obstacleCollision(enemyObstacles);
 			updatePowerups();
+		}
+		public function createWall(newX:Number):void
+		{
+			var wall:WallImage = new WallImage();
+			addChild(wall);
+			wall.x = newX;
+			wall.y = 300;
+			_wallArray.push(wall);
+		}
+		private function wallCollision():void
+		{
+			var l:int = _wallArray.length;
+			for (var i:int = l-1; i > 0; i--) 
+			{
+				if (_ball.object.hitTestObject(_wallArray[i])) {
+					_ball.speedX *= -1;
+					_ball.speedY *= -1;
+				}
+			}
 		}
 		private function updatePowerups():void
 		{
 			var l:int = _powerUpArray.length;
 			for (var i:int = l-1; i > 0; i--) 
 			{
+				_powerUpArray[i].update();
 				if (player01.pad.hitTestObject(_powerUpArray[i])) {
 					if (_powerUpArray[i].powerupId == 0)
 					{
@@ -105,12 +128,13 @@ package game
 				if (_ball.object.hitTestObject(_currentArray[i]))
 				{
 					SoundManager.playSound(SoundManager.SOUND_DESTROY);
-					if (Math.random() * 60 == 1)
+					var r:int = 0;
+					if (r == 0)
 					{
 						var powerUpManager:PowerUpManager;
 						powerUpManager = new PowerUpManager();
 						var newSpawnPos:Point = new Point(_currentArray[i].x, _currentArray[i].y);
-						powerUpManager.generatePowerUp(_currentArray[i].powerupId, _powerUpArray, this, newSpawnPos);
+						_powerUpArray.push(powerUpManager.generatePowerUp(_currentArray[i].powerupId, this, newSpawnPos));
 					}
 					removeChild(_currentArray[i]);
 					_currentArray.splice(i, 1);

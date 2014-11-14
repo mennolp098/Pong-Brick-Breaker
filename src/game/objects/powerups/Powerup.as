@@ -19,6 +19,8 @@ package game.objects.powerups
 			//addChild(powerupImage);
 			powerupId = id;
 			_speed = 3;
+			powerupImage.scaleX = 0.25;
+			powerupImage.scaleY = 0.25;
 		}
 		public function update():void
 		{

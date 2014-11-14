@@ -10,11 +10,12 @@ package game.objects.powerups
 	 */
 	public class PowerUpManager
 	{
-		public function generatePowerUp(id:Number, powerupArray:Array, container:DisplayObjectContainer, spawnPos:Point):void
+		public function generatePowerUp(id:Number, container:DisplayObjectContainer, spawnPos:Point):Powerup
 		{
 			// TODO: send a powerup 
 			var powerup:Powerup;
-			switch(Math.random() * 4) {
+			var random:int = Math.random() * 4;
+			switch(random) {
 				case 0:
 					powerup = new WallPowerup(id);
 					break;
@@ -34,7 +35,7 @@ package game.objects.powerups
 			container.addChild(powerup);
 			powerup.x = spawnPos.x;
 			powerup.y = spawnPos.y;
-			powerupArray.push(powerup);
+			return powerup;
 		}
 	}
 }

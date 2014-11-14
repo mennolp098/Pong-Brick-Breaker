@@ -11,9 +11,9 @@ package game.objects.powerups
 		
 		public function ShortenOtherPlayerPowerup(id:int) 
 		{
-			super(id);
 			powerupImage = new PowerupImageShort();
 			addChild(powerupImage);
+			super(id);
 		}
 		override public function sendPower(container:Game):void
 		{

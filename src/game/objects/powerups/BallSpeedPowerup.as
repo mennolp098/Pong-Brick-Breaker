@@ -11,9 +11,9 @@ package game.objects.powerups
 		
 		public function BallSpeedPowerup(id:int) 
 		{
-			super(id);
 			powerupImage = new PowerupImageBall();
 			addChild(powerupImage);
+			super(id);
 		}
 		override public function sendPower(container:Game):void
 		{
