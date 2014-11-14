@@ -10,7 +10,7 @@ package game.soundmanager
 	public class SoundManager 
 	{
 		public static const SOUND_BOINK : String	=	"soundBoink";
-		public static const SOUND_BOINk2 : String	=	"soundBoink2";
+		public static const SOUND_BOINK2 : String	=	"soundBoink2";
 		public static const SOUND_VICTORY : String	=	"soundVictory";
 		public static const SOUND_CLICK : String	=	"soundClick"; 
 		public static const SOUND_POWERUP : String	=	"soundPowerup";
@@ -35,7 +35,7 @@ package game.soundmanager
 			{
 				soundToPlay = new Sound(boinkReq);
 			} 
-			else if (sound == SOUND_BOINk2)
+			else if (sound == SOUND_BOINK2)
 			{
 				soundToPlay = new Sound(boink2Req);
 			}

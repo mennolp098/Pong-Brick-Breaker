@@ -169,7 +169,7 @@ package game
 					_ball.speedX *= -1;
 					_ball.speedY = BallAngle(enemy);
 					speedUp();
-					SoundManager.playSound(SoundManager.SOUND_BOINk2);
+					SoundManager.playSound(SoundManager.SOUND_BOINK2);
 				}
 			}
 		}
