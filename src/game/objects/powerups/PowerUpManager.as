@@ -1,20 +1,17 @@
 package game.objects.powerups 
 {
+	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.geom.Point;
 	/**
 	 * ...
 	 * @author Menno Jongejan
 	 */
 	public class PowerUpManager
 	{
-		public function PowerUpManager() 
+		public function generatePowerUp(id:Number, powerupArray:Array, container:DisplayObjectContainer, spawnPos:Point):void
 		{
-			
-		}
-		public function generatePowerUp(id:Number):void
-		{
-			trace("powerup send");
 			// TODO: send a powerup 
 			var powerup:Powerup;
 			switch(Math.random() * 4) {
@@ -30,6 +27,10 @@ package game.objects.powerups
 				default:
 					break;
 			}
+			container.addChild(powerup);
+			powerup.x = spawnPos.x;
+			powerup.y = spawnPos.y;
+			powerupArray.push(powerup);
 		}
 	}
 }

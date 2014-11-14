@@ -1,6 +1,7 @@
 package game 
 {
 	import flash.display.Sprite;
+	import flash.geom.Point;
 	import game.objects.pads.Enemy;
 	import game.objects.obstacles.ObstacleManager;
 	import game.objects.ball.Ball;
@@ -9,6 +10,7 @@ package game
 	import flash.events.Event;
 	import game.objects.powerups.PowerUpManager;
 	import game.objects.obstacles.Obstacle;
+	import game.soundmanager.SoundManager;
 	/**
 	 * ...
 	 * @author Menno Jongejan
@@ -20,7 +22,9 @@ package game
 		private var _obstacleManager:ObstacleManager;
 		private var _player01Obstacles:Array;
 		private var _enemyObstacles:Array;
+		private var _powerUpArray:Array;
 		private var _ball:Ball;
+		private var _soundManager:SoundManager;
 		public function Game() 
 		{
 			if (stage) init();
@@ -32,8 +36,10 @@ package game
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			_player01Obstacles = [];
 			_enemyObstacles = [];
+			_powerUpArray = [];
 			_player01 = new Player(this);
 			_obstacleManager = new ObstacleManager();
+			_soundManager = new SoundManager();
 			
 			_player01Obstacles = _obstacleManager.spawnObstacles(this, 10, 1);
 			_enemyObstacles = _obstacleManager.spawnObstacles(this, 660, 0);
@@ -75,26 +81,51 @@ package game
 			{
 				if (_ball.object.hitTestObject(_currentArray[i]))
 				{
+					SoundManager.playSound(SoundManager.SOUND_DESTROY);
 					if (Math.random() * 60 == 1)
 					{
 						var powerUpManager:PowerUpManager;
 						powerUpManager = new PowerUpManager();
-						powerUpManager.generatePowerUp(_currentArray[i].powerupId);
+						var spawnPos:Point = new Point(_currentArray[i].x, _currentArray[i].y);
+						powerUpManager.generatePowerUp(_currentArray[i].powerupId, _powerUpArray, this, spawnPos);
 					}
 					removeChild(_currentArray[i]);
 					_currentArray.splice(i, 1);
 					
+					var newArrayLenght = _currentArray.length;
 					if (_currentArray == _enemyObstacles)
 					{
-						spawnPos = [_enemy.pad.x, _enemy.pad.y];
-						whoCanFire = "enemy";
+						if (newArrayLenght == 0)
+						{
+							// TO DO: win
+							win();
+						} else {
+							spawnPos = [_enemy.pad.x, _enemy.pad.y];
+							whoCanFire = "enemy";
+						}
 					} else {
-						spawnPos = [_player01.pad.x, _player01.pad.y];
-						whoCanFire = "player";
+						if (newArrayLenght == 0)
+						{
+							// TO DO: lose
+							lose();
+						} else {
+							spawnPos = [_player01.pad.x, _player01.pad.y];
+							whoCanFire = "player";
+						}
 					}
 					_ball.die(this,spawnPos[0],spawnPos[1],whoCanFire);
 				}
 			}
+		}
+		private function win():void
+		{
+			SoundManager.playSound(SoundManager.SOUND_VICTORY);
+			// TO DO make victoryscreen 1 visible;
+		}
+		private function lose():void
+		{
+			SoundManager.playSound(SoundManager.SOUND_VICTORY);
+			//TO DO make victoryscreen 2 visible;
 		}
 		private function padCollision():void
 		{
@@ -105,6 +136,7 @@ package game
 					_ball.speedX *= -1;
 					_ball.speedY = BallAngle(_player01);
 					speedUp();
+					SoundManager.playSound(SoundManager.SOUND_BOINk);
 				}
 			}
 			if(_ball.object.hitTestObject(_enemy.pad))
@@ -114,6 +146,7 @@ package game
 					_ball.speedX *= -1;
 					_ball.speedY = BallAngle(_enemy);
 					speedUp();
+					SoundManager.playSound(SoundManager.SOUND_BOINk2);
 				}
 			}
 		}
