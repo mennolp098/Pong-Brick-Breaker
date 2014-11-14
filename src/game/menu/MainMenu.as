@@ -54,7 +54,7 @@ package game.menu
 			}
 			if (_creditsMenu.currentFrame == 90)
 			{
-				_helpMenu.gotoAndStop(0);
+				_creditsMenu.gotoAndStop(0);
 				removeChild(_creditsMenu);
 			}
 		}
