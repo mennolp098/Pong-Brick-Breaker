@@ -71,6 +71,29 @@ package game
 			padCollision();
 			obstacleCollision(_player01Obstacles);
 			obstacleCollision(_enemyObstacles);
+			updatePowerups();
+		}
+		private function updatePowerups():void
+		{
+			var l:int = _powerUpArray.length;
+			for (var i:int = l-1; i > 0; i--) 
+			{
+				if (_player01.pad.hitTestObject(_powerUpArray[i]) {
+					if (_powerUpArray[i].powerupId == 0)
+					{
+						_powerUpArray[i].sendPower();
+						removeChild(_powerUpArray[i]);
+						_powerUpArray.splice(i, 1);
+					}
+				} else if (_enemy.pad.hitTestObject(_powerUpArray[i]) {
+					if (_powerUpArray[i].powerupId == 1)
+					{
+						_powerUpArray[i].sendPower();
+						removeChild(_powerUpArray[i]);
+						_powerUpArray.splice(i, 1);
+					}
+				}
+			}
 		}
 		private function obstacleCollision(_currentArray:Array):void
 		{

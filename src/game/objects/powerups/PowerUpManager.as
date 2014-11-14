@@ -16,15 +16,19 @@ package game.objects.powerups
 			var powerup:Powerup;
 			switch(Math.random() * 4) {
 				case 0:
-					
+					powerup = new WallPowerup(id);
 					break;
 				case 1:
+					powerup = new SpeedPowerup(id);
 					break;
 				case 2:
+					powerup = new BallSpeedPowerup(id);
 					break;
 				case 3:
+					powerup = new ShortenOtherPlayerPowerup(id);
 					break;
 				default:
+					powerup = new WallPowerup(id);
 					break;
 			}
 			container.addChild(powerup);
