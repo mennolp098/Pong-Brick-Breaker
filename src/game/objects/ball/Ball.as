@@ -27,11 +27,13 @@ package game.objects.ball
 		}
 		public function update(container:DisplayObjectContainer):void
 		{
-			//trace(addedspeed);
-			//trace(speedX);
 			object.x += speedX * addedspeed;
 			object.y += speedY;
-			object.scaleX = speedX/6;
+			object.scaleX = speedX / 6;
+			if (object.x <= container.stage.stageWidth)
+			{
+				trace("hi");
+			}
 			if (object.y >= container.stage.stageHeight)
 			{
 				speedY *= -1;

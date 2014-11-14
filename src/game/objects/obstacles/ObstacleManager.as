@@ -21,37 +21,7 @@ package game.objects.obstacles
 				displayImage = new ObstacleImage01();
 				var obstacle:Obstacle;
 				var tabel:int = Math.random() * 7;
-				switch(tabel)
-				{
-					
-					case 0:
-						displayImage.gotoAndStop(1);
-						break;
-					case 1:
-						displayImage.gotoAndStop(2);
-						break;
-					case 2:
-						displayImage.gotoAndStop(3);
-						break;
-					case 3:
-						displayImage.gotoAndStop(4);
-						break;
-					case 4:
-						displayImage.gotoAndStop(5);
-						break;
-					case 5:
-						displayImage.gotoAndStop(6);
-						break;
-					case 6:
-						displayImage.gotoAndStop(7);
-						break;
-					case 7:
-						displayImage.gotoAndStop(8);
-						break;
-					default:
-						displayImage.gotoAndStop(1);
-						break;
-				}
+				displayImage.gotoAndStop(tabel);
 				obstacle = new Obstacle(displayImage,powerupId);
 				container.addChild(obstacle);
 				obstacle.x = x;
