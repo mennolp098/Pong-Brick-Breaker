@@ -55,7 +55,7 @@ package game.soundmanager
 			{
 				soundToPlay = new Sound(victoryReq);
 			}
-			soundChannel = soundToPlay.play();
+			//soundChannel = soundToPlay.play();
 		}
 	}
 }

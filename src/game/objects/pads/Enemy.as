@@ -12,6 +12,8 @@ package game.objects.pads
 		private var _currentBall:Ball;
 		public function Enemy(container:DisplayObjectContainer, ball:Ball) 
 		{
+			pad = new player02();
+			container.addChild(pad);
 			super(container);
 			pad.x = 600;
 			_currentBall = ball;
@@ -22,7 +24,7 @@ package game.objects.pads
 			super.update();
 			var ballY:Number = _currentBall.object.y;
 			var ballX:Number = _currentBall.object.x;
-			if (ballY == pad.y && ballX == pad.x)
+			if (ballY >= pad.y-20 && ballY <= pad.y+20 && ballX == pad.x)
 			{
 				dispatchEvent(new Event(Pad.FIREBALL, true));
 			}

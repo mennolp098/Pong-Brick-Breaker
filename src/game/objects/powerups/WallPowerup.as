@@ -2,6 +2,7 @@ package game.objects.powerups
 {
 	import flash.display.DisplayObjectContainer;
 	import game.Game;
+	import flash.utils.setTimeout;
 	/**
 	 * ...
 	 * @author Menno Jongejan
@@ -20,9 +21,9 @@ package game.objects.powerups
 			super.sendPower(container);
 			if (powerupId == 0)
 			{
-				container.createWall(200);
+				container.createWall(150);
 			} else {
-				container.createWall(600);
+				container.createWall(650);
 			}
 		}
 	}

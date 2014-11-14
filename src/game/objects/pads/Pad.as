@@ -1,6 +1,7 @@
 package game.objects.pads 
 {
 	import flash.display.DisplayObjectContainer;
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.EventDispatcher;
 	import game.Game;
@@ -15,12 +16,10 @@ package game.objects.pads
 		protected var _yVelocity:Number;
 		public var speed:Number
 		
-		public var pad:PadImage;
+		public var pad:MovieClip;
 		
 		public function Pad(container:DisplayObjectContainer) 
 		{
-			pad = new PadImage();
-			container.addChild(pad);
 			pad.y = 300;
 			_yVelocity = 0;
 			speed = 5;
@@ -29,6 +28,14 @@ package game.objects.pads
 		public function update():void
 		{
 			pad.y += _yVelocity * speed;
+			while (pad.y >= 600)
+			{
+				pad.y -= 1;
+			} 
+			while (pad.y <= 0)
+			{
+				pad.y += 1;
+			}
 		}
 	}
 }

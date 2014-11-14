@@ -14,6 +14,8 @@ package game.objects.pads
 		private var _attackKey:int;
 		public function Player(container:DisplayObjectContainer) 
 		{
+			pad = new Player01();
+			container.addChild(pad);
 			super(container);
 			pad.x = 200;
 			_upKey = 38;
@@ -21,7 +23,6 @@ package game.objects.pads
 			_downKey = 40;
 			container.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
 			container.stage.addEventListener(KeyboardEvent.KEY_UP, keyUp);
-		
 		}
 		private function keyDown(e:KeyboardEvent):void
 		{
@@ -37,6 +38,7 @@ package game.objects.pads
 			}
 			if (e.keyCode == _attackKey)
 			{
+				pad.gotoAndStop(3);
 				dispatchEvent(new Event(Pad.FIREBALL, true));
 			}
 		}

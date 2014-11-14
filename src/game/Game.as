@@ -11,6 +11,7 @@ package game
 	import game.objects.powerups.PowerUpManager;
 	import game.objects.obstacles.Obstacle;
 	import game.soundmanager.SoundManager;
+	import flash.utils.setTimeout;
 	/**
 	 * ...
 	 * @author Menno Jongejan
@@ -19,9 +20,11 @@ package game
 	{
 		public var player01:Player;
 		public var enemy:Enemy;
+		private var _winScreenPlayer01:VictoryImage1;
+		private var _winScreenPlayer02:VictoryImage2;
 		private var _obstacleManager:ObstacleManager;
-		private var player01Obstacles:Array;
-		private var enemyObstacles:Array;
+		private var _player01Obstacles:Array;
+		private var _enemyObstacles:Array;
 		private var _powerUpArray:Array;
 		private var _wallArray:Array;
 		private var _ball:Ball;
@@ -35,16 +38,18 @@ package game
 		private function init(e:Event = null):void 
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			player01Obstacles = [];
-			enemyObstacles = [];
+			_player01Obstacles = [];
+			_enemyObstacles = [];
 			_powerUpArray = [];
 			_wallArray = [];
 			player01 = new Player(this);
 			_obstacleManager = new ObstacleManager();
 			_soundManager = new SoundManager();
+			_winScreenPlayer01 = new VictoryImage1();
+			_winScreenPlayer02 = new VictoryImage2();
 			
-			player01Obstacles = _obstacleManager.spawnObstacles(this, 10, 1);
-			enemyObstacles = _obstacleManager.spawnObstacles(this, 660, 0);
+			_player01Obstacles = _obstacleManager.spawnObstacles(this, 10, 1);
+			_enemyObstacles = _obstacleManager.spawnObstacles(this, 660, 0);
 			
 			_ball = new Ball(this, player01);
 			_ball.object.x = stage.stageWidth / 2;
@@ -55,6 +60,11 @@ package game
 			stage.addEventListener(Event.ENTER_FRAME, update);
 			player01.addEventListener(Pad.FIREBALL, fireBall);
 			enemy.addEventListener(Pad.FIREBALL, fireBall);
+			
+			addChild(_winScreenPlayer01);
+			addChild(_winScreenPlayer02);
+			_winScreenPlayer01.visible = false;
+			_winScreenPlayer02.visible = false;
 		}
 		
 		private function fireBall(e:Event):void 
@@ -72,8 +82,8 @@ package game
 			enemy.update();
 			padCollision();
 			wallCollision();
-			obstacleCollision(player01Obstacles);
-			obstacleCollision(enemyObstacles);
+			obstacleCollision(_player01Obstacles);
+			obstacleCollision(_enemyObstacles);
 			updatePowerups();
 		}
 		public function createWall(newX:Number):void
@@ -83,22 +93,30 @@ package game
 			wall.x = newX;
 			wall.y = 300;
 			_wallArray.push(wall);
+			setTimeout(removeWall, 5000);
+		}
+		private function removeWall():void
+		{
+			removeChild(_wallArray[0]);
+			_wallArray.splice(0, 1);
 		}
 		private function wallCollision():void
 		{
 			var l:int = _wallArray.length;
-			for (var i:int = l-1; i > 0; i--) 
+			for (var i:int = l-1; i >= 0; i--) 
 			{
 				if (_ball.object.hitTestObject(_wallArray[i])) {
 					_ball.speedX *= -1;
 					_ball.speedY *= -1;
+					_ball.object.x += _ball.speedX;
+					_ball.object.y += _ball.speedY;
 				}
 			}
 		}
 		private function updatePowerups():void
 		{
 			var l:int = _powerUpArray.length;
-			for (var i:int = l-1; i > 0; i--) 
+			for (var i:int = l-1; i >= 0; i--) 
 			{
 				_powerUpArray[i].update();
 				if (player01.pad.hitTestObject(_powerUpArray[i])) {
@@ -123,7 +141,7 @@ package game
 			var l:int = _currentArray.length;
 			var spawnPos:Array;
 			var whoCanFire:String;
-			for (var i:int = l-1; i > 0; i--) 
+			for (var i:int = l-1; i >= 0; i--) 
 			{
 				if (_ball.object.hitTestObject(_currentArray[i]))
 				{
@@ -140,11 +158,12 @@ package game
 					_currentArray.splice(i, 1);
 					
 					var newArrayLenght:int = _currentArray.length;
-					if (_currentArray == enemyObstacles)
+					if (_currentArray == _enemyObstacles)
 					{
 						if (newArrayLenght == 0)
 						{
 							// TO DO: win
+							break;
 							win();
 						} else {
 							spawnPos = [enemy.pad.x, enemy.pad.y];
@@ -154,6 +173,7 @@ package game
 						if (newArrayLenght == 0)
 						{
 							// TO DO: lose
+							break;
 							lose();
 						} else {
 							spawnPos = [player01.pad.x, player01.pad.y];
@@ -167,12 +187,14 @@ package game
 		private function win():void
 		{
 			SoundManager.playSound(SoundManager.SOUND_VICTORY);
-			// TO DO make victoryscreen 1 visible;
+			_winScreenPlayer01.visible = true;
+			removeEventListener(Event.ENTER_FRAME, update);
 		}
 		private function lose():void
 		{
 			SoundManager.playSound(SoundManager.SOUND_VICTORY);
-			//TO DO make victoryscreen 2 visible;
+			_winScreenPlayer02.visible = true;
+			removeEventListener(Event.ENTER_FRAME, update);
 		}
 		private function padCollision():void
 		{
