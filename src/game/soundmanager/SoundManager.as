@@ -24,12 +24,12 @@ package game.soundmanager
 		public static function playSound(sound:String):void
 		{
 			var soundToPlay:Sound;
-			var boinkReq:URLRequest = new URLRequest("sounds/boink.wav"); 
-			var boink2Req:URLRequest = new URLRequest("sounds/boink2.wav");
-			var victoryReq:URLRequest = new URLRequest("sounds/drumroll_victory.wav");
-			var clickReq:URLRequest = new URLRequest("sounds/menuclick.wav");
-			var powerupReq:URLRequest = new URLRequest("sounds/powerupz.wav");
-			var destroyReq:URLRequest = new URLRequest("sounds/tabledestroy.wav");
+			var boinkReq:URLRequest = new URLRequest("sounds/boink.mp3"); 
+			var boink2Req:URLRequest = new URLRequest("sounds/boink2.mp3");
+			var victoryReq:URLRequest = new URLRequest("sounds/drumroll_victory.mp3");
+			var clickReq:URLRequest = new URLRequest("sounds/menuclick.mp3");
+			var powerupReq:URLRequest = new URLRequest("sounds/powerupz.mp3");
+			var destroyReq:URLRequest = new URLRequest("sounds/tabledestroy.mp3");
 			
 			if (sound == SOUND_BOINK)
 			{

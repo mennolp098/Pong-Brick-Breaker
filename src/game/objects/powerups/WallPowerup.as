@@ -1,6 +1,7 @@
 package game.objects.powerups 
 {
 	import flash.display.DisplayObjectContainer;
+	import game.Game;
 	/**
 	 * ...
 	 * @author Menno Jongejan
@@ -14,8 +15,9 @@ package game.objects.powerups
 			powerupImage = new PowerupImageWall();
 			addChild(powerupImage);
 		}
-		override public function sendPower(container:DisplayObjectContainer)
+		override public function sendPower(container:Game):void
 		{
+			super.sendPower(container);
 			var wall:WallImage = new WallImage();
 			if (powerupId == 0)
 			{

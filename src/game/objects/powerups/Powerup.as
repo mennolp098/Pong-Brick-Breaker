@@ -1,7 +1,9 @@
 package game.objects.powerups 
 {
+	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
+	import game.Game;
 	/**
 	 * ...
 	 * @author Menno Jongejan
@@ -18,16 +20,16 @@ package game.objects.powerups
 			powerupId = id;
 			_speed = 3;
 		}
-		public function update()
+		public function update():void
 		{
-			if (id == 0)
+			if (powerupId == 0)
 			{
 				this.x -= _speed;
 			} else {
 				this.x += _speed;
 			}
 		}
-		public function sendPower()
+		public function sendPower(container:Game):void
 		{
 			
 		}

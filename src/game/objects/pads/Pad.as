@@ -13,7 +13,7 @@ package game.objects.pads
 		public static const FIREBALL:String = "fireBall";
 		
 		protected var _yVelocity:Number;
-		protected var _speed:Number
+		public var speed:Number
 		
 		public var pad:PadImage;
 		
@@ -23,12 +23,12 @@ package game.objects.pads
 			container.addChild(pad);
 			pad.y = 300;
 			_yVelocity = 0;
-			_speed = 5;
+			speed = 5;
 			pad.gotoAndStop(1);
 		}
 		public function update():void
 		{
-			pad.y += _yVelocity * _speed;
+			pad.y += _yVelocity * speed;
 		}
 	}
 }

@@ -17,11 +17,11 @@ package game
 	 */
 	public class Game extends Sprite
 	{
-		private var _player01:Player;
-		private var _enemy:Enemy;
+		public var player01:Player;
+		public var enemy:Enemy;
 		private var _obstacleManager:ObstacleManager;
-		private var _player01Obstacles:Array;
-		private var _enemyObstacles:Array;
+		private var player01Obstacles:Array;
+		private var enemyObstacles:Array;
 		private var _powerUpArray:Array;
 		private var _ball:Ball;
 		private var _soundManager:SoundManager;
@@ -34,30 +34,30 @@ package game
 		private function init(e:Event = null):void 
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			_player01Obstacles = [];
-			_enemyObstacles = [];
+			player01Obstacles = [];
+			enemyObstacles = [];
 			_powerUpArray = [];
-			_player01 = new Player(this);
+			player01 = new Player(this);
 			_obstacleManager = new ObstacleManager();
 			_soundManager = new SoundManager();
 			
-			_player01Obstacles = _obstacleManager.spawnObstacles(this, 10, 1);
-			_enemyObstacles = _obstacleManager.spawnObstacles(this, 660, 0);
+			player01Obstacles = _obstacleManager.spawnObstacles(this, 10, 1);
+			enemyObstacles = _obstacleManager.spawnObstacles(this, 660, 0);
 			
-			_ball = new Ball(this, _player01);
+			_ball = new Ball(this, player01);
 			_ball.object.x = stage.stageWidth / 2;
 			_ball.object.y = stage.stageHeight / 2;
 			
-			_enemy = new Enemy(this, _ball);
+			enemy = new Enemy(this, _ball);
 			
 			stage.addEventListener(Event.ENTER_FRAME, update);
-			_player01.addEventListener(Pad.FIREBALL, fireBall);
-			_enemy.addEventListener(Pad.FIREBALL, fireBall);
+			player01.addEventListener(Pad.FIREBALL, fireBall);
+			enemy.addEventListener(Pad.FIREBALL, fireBall);
 		}
 		
 		private function fireBall(e:Event):void 
 		{
-			if (e.currentTarget == _player01) {
+			if (e.currentTarget == player01) {
 				_ball.fireBall("player");
 			} else {
 				_ball.fireBall("enemy");
@@ -66,11 +66,11 @@ package game
 		private function update(e:Event):void 
 		{
 			_ball.update(this);
-			_player01.update();
-			_enemy.update();
+			player01.update();
+			enemy.update();
 			padCollision();
-			obstacleCollision(_player01Obstacles);
-			obstacleCollision(_enemyObstacles);
+			obstacleCollision(player01Obstacles);
+			obstacleCollision(enemyObstacles);
 			updatePowerups();
 		}
 		private function updatePowerups():void
@@ -78,17 +78,17 @@ package game
 			var l:int = _powerUpArray.length;
 			for (var i:int = l-1; i > 0; i--) 
 			{
-				if (_player01.pad.hitTestObject(_powerUpArray[i]) {
+				if (player01.pad.hitTestObject(_powerUpArray[i])) {
 					if (_powerUpArray[i].powerupId == 0)
 					{
-						_powerUpArray[i].sendPower();
+						_powerUpArray[i].sendPower(this);
 						removeChild(_powerUpArray[i]);
 						_powerUpArray.splice(i, 1);
 					}
-				} else if (_enemy.pad.hitTestObject(_powerUpArray[i]) {
+				} else if (enemy.pad.hitTestObject(_powerUpArray[i])) {
 					if (_powerUpArray[i].powerupId == 1)
 					{
-						_powerUpArray[i].sendPower();
+						_powerUpArray[i].sendPower(this);
 						removeChild(_powerUpArray[i]);
 						_powerUpArray.splice(i, 1);
 					}
@@ -109,21 +109,21 @@ package game
 					{
 						var powerUpManager:PowerUpManager;
 						powerUpManager = new PowerUpManager();
-						var spawnPos:Point = new Point(_currentArray[i].x, _currentArray[i].y);
-						powerUpManager.generatePowerUp(_currentArray[i].powerupId, _powerUpArray, this, spawnPos);
+						var newSpawnPos:Point = new Point(_currentArray[i].x, _currentArray[i].y);
+						powerUpManager.generatePowerUp(_currentArray[i].powerupId, _powerUpArray, this, newSpawnPos);
 					}
 					removeChild(_currentArray[i]);
 					_currentArray.splice(i, 1);
 					
-					var newArrayLenght = _currentArray.length;
-					if (_currentArray == _enemyObstacles)
+					var newArrayLenght:int = _currentArray.length;
+					if (_currentArray == enemyObstacles)
 					{
 						if (newArrayLenght == 0)
 						{
 							// TO DO: win
 							win();
 						} else {
-							spawnPos = [_enemy.pad.x, _enemy.pad.y];
+							spawnPos = [enemy.pad.x, enemy.pad.y];
 							whoCanFire = "enemy";
 						}
 					} else {
@@ -132,7 +132,7 @@ package game
 							// TO DO: lose
 							lose();
 						} else {
-							spawnPos = [_player01.pad.x, _player01.pad.y];
+							spawnPos = [player01.pad.x, player01.pad.y];
 							whoCanFire = "player";
 						}
 					}
@@ -152,22 +152,22 @@ package game
 		}
 		private function padCollision():void
 		{
-			if(_ball.object.hitTestObject(_player01.pad))
+			if(_ball.object.hitTestObject(player01.pad))
 			{
-				if( _ball.speedX < 0 && _player01.pad.currentFrame == 1)
+				if( _ball.speedX < 0 && player01.pad.currentFrame == 1)
 				{
 					_ball.speedX *= -1;
-					_ball.speedY = BallAngle(_player01);
+					_ball.speedY = BallAngle(player01);
 					speedUp();
-					SoundManager.playSound(SoundManager.SOUND_BOINk);
+					SoundManager.playSound(SoundManager.SOUND_BOINK);
 				}
 			}
-			if(_ball.object.hitTestObject(_enemy.pad))
+			if(_ball.object.hitTestObject(enemy.pad))
 			{
-				if(_ball.speedX > 0 && _enemy.pad.currentFrame == 1)
+				if(_ball.speedX > 0 && enemy.pad.currentFrame == 1)
 				{
 					_ball.speedX *= -1;
-					_ball.speedY = BallAngle(_enemy);
+					_ball.speedY = BallAngle(enemy);
 					speedUp();
 					SoundManager.playSound(SoundManager.SOUND_BOINk2);
 				}
@@ -177,8 +177,12 @@ package game
 		{
 			if (_ball.addedspeed <= 3)
 			{
-			_ball.addedspeed += 0.1;
+				_ball.addedspeed += 0.1;
 			}
+		}
+		public function addExtraSpeed():void
+		{
+			_ball.addedspeed += 1;
 		}
 		private function BallAngle(paddel:Pad):Number
 		{
