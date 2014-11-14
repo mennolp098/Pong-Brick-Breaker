@@ -27,8 +27,6 @@ package game.objects.ball
 		}
 		public function update(container:DisplayObjectContainer):void
 		{
-			trace(addedspeed);
-			trace(speedX);
 			object.x += speedX * addedspeed;
 			object.y += speedY;
 			object.scaleX = speedX / 6;
